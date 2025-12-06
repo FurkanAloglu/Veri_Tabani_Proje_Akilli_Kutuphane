@@ -1,16 +1,9 @@
 package com.example.smart_library.repository;
 
-import com.example.smart_library.model.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.smart_library.model.Category;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorRepository extends JpaRepository<Author,Long>{
-
-
-
-
-
-
-
+public interface CategoryRepository extends JpaRepository<Category,Long> {
 }
