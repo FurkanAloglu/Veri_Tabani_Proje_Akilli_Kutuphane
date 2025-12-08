@@ -19,7 +19,7 @@ public class AuthorService {
     }
 
     public Author save(Author author){
-        return authorRepository.save(author);//Create-Update
+        return authorRepository.save(author);//Create ve Update
     }
 
     public Optional<Author> findById(Long id){

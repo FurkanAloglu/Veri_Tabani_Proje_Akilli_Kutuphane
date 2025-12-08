@@ -22,7 +22,7 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Optional<Book> FindById(Long id){
+    public Optional<Book> findById(Long id){
         return bookRepository.findById(id);
     }
 

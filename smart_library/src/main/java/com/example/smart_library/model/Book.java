@@ -9,6 +9,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,7 @@ public class Book {
     private Integer pageCount;
 
     @ManyToOne(fetch= FetchType.LAZY)
+
     @JoinColumn(name="category_id",nullable = false)
     private Category category;
 
