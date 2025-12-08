@@ -21,6 +21,7 @@ public class AuthorController{
     @GetMapping
     public ResponseEntity<List<Author>> getAllAuthors(){
         List<Author> authors= authorService.findAll();
+
         return ResponseEntity.ok(authors);
     }
 

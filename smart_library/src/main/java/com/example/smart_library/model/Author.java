@@ -1,5 +1,6 @@
 package com.example.smart_library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -24,5 +25,6 @@ public class Author{
     private String surname;
 
     @OneToMany(mappedBy="author",cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Book> books;
 }

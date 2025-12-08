@@ -24,7 +24,7 @@ public class Penalty{
     @Column
     private LocalDateTime paymentDate;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch =FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch =FetchType.EAGER)
     @JoinColumn(name="borrowing_id",unique = true,nullable = false)
     private Borrowing borrowing;
 
