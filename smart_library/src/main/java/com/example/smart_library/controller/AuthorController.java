@@ -1,14 +1,13 @@
 package com.example.smart_library.controller;
 
 import com.example.smart_library.model.Author;
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.smart_library.service.AuthorService;
-import org.springframework.web.bind.annotation.*;
 import lombok.*;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/authors")
@@ -21,7 +20,6 @@ public class AuthorController{
     @GetMapping
     public ResponseEntity<List<Author>> getAllAuthors(){
         List<Author> authors= authorService.findAll();
-
         return ResponseEntity.ok(authors);
     }
 
@@ -32,14 +30,14 @@ public class AuthorController{
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Author> getAuthorById(@PathVariable Long id){
+    public ResponseEntity<Author> getAuthorById(@PathVariable UUID id){
         return authorService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAuthor(@PathVariable Long id){
+    public ResponseEntity<Void> deleteAuthor(@PathVariable UUID id){
         authorService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

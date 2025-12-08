@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/borrowings")
@@ -30,14 +31,14 @@ public class BorrowingController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Borrowing> getBorrowingById(@PathVariable Long id) {
+    public ResponseEntity<Borrowing> getBorrowingById(@PathVariable UUID id) {
         return borrowingService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteBorrowing(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteBorrowing(@PathVariable UUID id) {
         borrowingService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

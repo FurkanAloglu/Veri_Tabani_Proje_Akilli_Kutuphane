@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/penalties")
@@ -30,14 +31,14 @@ public class PenaltyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Penalty> getPenaltyById(@PathVariable Long id) {
+    public ResponseEntity<Penalty> getPenaltyById(@PathVariable UUID id) {
         return penaltyService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePenalty(@PathVariable Long id) {
+    public ResponseEntity<Void> deletePenalty(@PathVariable UUID id) {
         penaltyService.deleteById(id);
         return ResponseEntity.noContent().build();
     }

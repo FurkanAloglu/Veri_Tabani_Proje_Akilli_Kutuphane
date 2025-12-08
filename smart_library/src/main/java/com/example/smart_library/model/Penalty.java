@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -12,8 +13,8 @@ import java.math.BigDecimal;
 @Entity
 public class Penalty{
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long penaltyId;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private UUID penaltyId;
 
     @Column(nullable = false,scale=2,precision=6)
     private BigDecimal penaltyFee;

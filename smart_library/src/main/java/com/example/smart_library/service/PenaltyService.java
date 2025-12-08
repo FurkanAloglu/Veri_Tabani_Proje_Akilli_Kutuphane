@@ -5,6 +5,7 @@ import com.example.smart_library.repository.PenaltyRepository;
 import com.example.smart_library.model.Penalty;
 import java.util.Optional;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PenaltyService{
@@ -22,11 +23,11 @@ public class PenaltyService{
         return penaltyRepository.save(penalty);
     }
 
-    public Optional<Penalty> findById(Long id){
+    public Optional<Penalty> findById(UUID id){
         return penaltyRepository.findById(id);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(UUID id){
         penaltyRepository.deleteById(id);
     }
 

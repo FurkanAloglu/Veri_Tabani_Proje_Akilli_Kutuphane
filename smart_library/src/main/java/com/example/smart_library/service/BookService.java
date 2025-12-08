@@ -5,6 +5,7 @@ import com.example.smart_library.model.Book;
 import com.example.smart_library.repository.BookRepository;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class BookService {
@@ -22,11 +23,11 @@ public class BookService {
         return bookRepository.save(book);
     }
 
-    public Optional<Book> findById(Long id){
+    public Optional<Book> findById(UUID id){
         return bookRepository.findById(id);
     }
 
-    public void deleteById(Long id){
+    public void deleteById(UUID id){
         bookRepository.deleteById(id);
     }
 }

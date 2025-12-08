@@ -2,6 +2,7 @@ package com.example.smart_library.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -10,8 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID userID;
 
     @Column(nullable = false, length = 100)
     private String name;

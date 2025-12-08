@@ -15,8 +15,8 @@ import java.util.UUID;
 public class Author{
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long authorID;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private UUID authorID;
 
     @Column
     private String name;

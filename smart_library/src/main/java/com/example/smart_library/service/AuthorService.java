@@ -5,6 +5,7 @@ import com.example.smart_library.model.Author;
 import com.example.smart_library.repository.AuthorRepository;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AuthorService {
@@ -22,11 +23,11 @@ public class AuthorService {
         return authorRepository.save(author);//Create ve Update
     }
 
-    public Optional<Author> findById(Long id){
+    public Optional<Author> findById(UUID id){
         return authorRepository.findById(id); //Read
     }
 
-    public void deleteById(Long id){
+    public void deleteById(UUID id){
         authorRepository.deleteById(id);//Delete
     }
 
