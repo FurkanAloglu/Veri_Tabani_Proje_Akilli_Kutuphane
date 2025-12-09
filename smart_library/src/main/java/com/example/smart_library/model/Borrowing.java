@@ -28,12 +28,12 @@ public class Borrowing {
     @Column()
     private Boolean isPenalty;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id",nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userID",nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="book_id",nullable=false)
+    @JoinColumn(name="bookID",nullable=false)
     private Book book;
 
     @OneToOne(mappedBy="borrowing",cascade = CascadeType.ALL, fetch=FetchType.LAZY)

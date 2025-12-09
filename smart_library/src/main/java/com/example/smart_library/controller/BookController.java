@@ -1,6 +1,7 @@
 package com.example.smart_library.controller;
 
-import com.example.smart_library.model.Book;
+import com.example.smart_library.dto.book.BookRequest;
+import com.example.smart_library.dto.book.BookResponse;
 import com.example.smart_library.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,19 +19,19 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> books = bookService.findAll();
+    public ResponseEntity<List<BookResponse>> getAllBooks() {
+        List<BookResponse> books = bookService.findAll();
         return ResponseEntity.ok(books);
     }
 
     @PostMapping
-    public ResponseEntity<Book> createBook(@RequestBody Book book) {
-        Book savedBook = bookService.save(book);
+    public ResponseEntity<BookResponse> createBook(@RequestBody BookRequest bookRequest) {
+        BookResponse savedBook = bookService.save(bookRequest);
         return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable UUID id) {
+    public ResponseEntity<BookResponse> getBookById(@PathVariable UUID id) {
         return bookService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

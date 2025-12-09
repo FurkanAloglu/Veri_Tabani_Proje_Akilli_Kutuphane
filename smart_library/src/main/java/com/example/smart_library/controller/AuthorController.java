@@ -1,10 +1,11 @@
 package com.example.smart_library.controller;
 
-import com.example.smart_library.model.Author;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.smart_library.service.AuthorService;
+import com.example.smart_library.dto.author.AuthorRequest;
+import com.example.smart_library.dto.author.AuthorResponse;
 import lombok.*;
 import java.util.List;
 import java.util.UUID;
@@ -18,19 +19,19 @@ public class AuthorController{
     private final AuthorService authorService;
 
     @GetMapping
-    public ResponseEntity<List<Author>> getAllAuthors(){
-        List<Author> authors= authorService.findAll();
+    public ResponseEntity<List<AuthorResponse>> getAllAuthors(){
+        List<AuthorResponse> authors= authorService.findAll();
         return ResponseEntity.ok(authors);
     }
 
     @PostMapping
-    public ResponseEntity<Author> createAuthor(@RequestBody Author author){
-        Author savedAuthor = authorService.save(author);
+    public ResponseEntity<AuthorResponse> createAuthor(@RequestBody AuthorRequest authorRequest){
+        AuthorResponse savedAuthor = authorService.save(authorRequest);
         return new ResponseEntity<>(savedAuthor, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Author> getAuthorById(@PathVariable UUID id){
+    public ResponseEntity<AuthorResponse> getAuthorById(@PathVariable UUID id){
         return authorService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

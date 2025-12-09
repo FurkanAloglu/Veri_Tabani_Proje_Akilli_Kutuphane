@@ -1,6 +1,7 @@
 package com.example.smart_library.controller;
 
-import com.example.smart_library.model.Category;
+import com.example.smart_library.dto.category.CategoryRequest;
+import com.example.smart_library.dto.category.CategoryResponse;
 import com.example.smart_library.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,19 +20,19 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<Category>> getAllCategories() {
-        List<Category> categories = categoryService.findAll();
+    public ResponseEntity<List<CategoryResponse>> getAllCategories() {
+        List<CategoryResponse> categories = categoryService.findAll();
         return ResponseEntity.ok(categories);
     }
 
     @PostMapping
-    public ResponseEntity<Category> createCategory(@RequestBody Category category) {
-        Category savedCategory = categoryService.save(category);
+    public ResponseEntity<CategoryResponse> createCategory(@RequestBody CategoryRequest request) {
+        CategoryResponse savedCategory = categoryService.save(request);
         return new ResponseEntity<>(savedCategory, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable UUID id) {
+    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable UUID id) {
         return categoryService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

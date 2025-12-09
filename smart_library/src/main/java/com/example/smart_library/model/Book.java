@@ -25,13 +25,13 @@ public class Book {
     @Column()
     private Integer pageCount;
 
-    @ManyToOne(fetch= FetchType.EAGER)
+    @ManyToOne(fetch= FetchType.LAZY)
 
-    @JoinColumn(name="category_id",nullable = false)
+    @JoinColumn(name="categoryID",nullable = false)
     private Category category;
 
-    @ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name="author_id")
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="authorID")
     private Author author;
 
 }

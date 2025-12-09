@@ -1,6 +1,7 @@
 package com.example.smart_library.controller;
 
-import com.example.smart_library.model.Penalty;
+import com.example.smart_library.dto.penalty.PenaltyRequest;
+import com.example.smart_library.dto.penalty.PenaltyResponse;
 import com.example.smart_library.service.PenaltyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,19 +20,19 @@ public class PenaltyController {
     private final PenaltyService penaltyService;
 
     @GetMapping
-    public ResponseEntity<List<Penalty>> getAllPenalties() {
-        List<Penalty> penalties = penaltyService.findAll();
+    public ResponseEntity<List<PenaltyResponse>> getAllPenalties() {
+        List<PenaltyResponse> penalties = penaltyService.findAll();
         return ResponseEntity.ok(penalties);
     }
 
     @PostMapping
-    public ResponseEntity<Penalty> createPenalty(@RequestBody Penalty penalty) {
-        Penalty savedPenalty = penaltyService.save(penalty);
+    public ResponseEntity<PenaltyResponse> createPenalty(@RequestBody PenaltyRequest penaltyRequest) {
+        PenaltyResponse savedPenalty = penaltyService.save(penaltyRequest);
         return new ResponseEntity<>(savedPenalty, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Penalty> getPenaltyById(@PathVariable UUID id) {
+    public ResponseEntity<PenaltyResponse> getPenaltyById(@PathVariable UUID id) {
         return penaltyService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

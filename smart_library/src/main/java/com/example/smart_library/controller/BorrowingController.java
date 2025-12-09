@@ -1,6 +1,7 @@
 package com.example.smart_library.controller;
 
-import com.example.smart_library.model.Borrowing;
+import com.example.smart_library.dto.borrowing.BorrowingRequest;
+import com.example.smart_library.dto.borrowing.BorrowingResponse;
 import com.example.smart_library.service.BorrowingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,19 +20,19 @@ public class BorrowingController {
     private final BorrowingService borrowingService;
 
     @GetMapping
-    public ResponseEntity<List<Borrowing>> getAllBorrowings() {
-        List<Borrowing> borrowings = borrowingService.findAll();
+    public ResponseEntity<List<BorrowingResponse>> getAllBorrowings() {
+        List<BorrowingResponse> borrowings = borrowingService.findAll();
         return ResponseEntity.ok(borrowings);
     }
 
     @PostMapping
-    public ResponseEntity<Borrowing> createBorrowing(@RequestBody Borrowing borrowing) {
-        Borrowing savedBorrowing = borrowingService.save(borrowing);
+    public ResponseEntity<BorrowingResponse> createBorrowing(@RequestBody BorrowingRequest borrowingRequest) {
+        BorrowingResponse savedBorrowing = borrowingService.save(borrowingRequest);
         return new ResponseEntity<>(savedBorrowing, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Borrowing> getBorrowingById(@PathVariable UUID id) {
+    public ResponseEntity<BorrowingResponse> getBorrowingById(@PathVariable UUID id) {
         return borrowingService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
