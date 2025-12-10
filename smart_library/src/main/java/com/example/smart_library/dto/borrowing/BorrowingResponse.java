@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BorrowingResponse {
-    private UUID id;
+    private UUID borrowID;
     private LocalDateTime borrowDate;
     private LocalDateTime returnDate;
     private LocalDateTime relayReturnDate;
@@ -21,4 +21,3 @@ public class BorrowingResponse {
     private UUID userId;
     private UUID bookId;
 }
-

@@ -13,9 +13,10 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BorrowingRequest {
+    private UUID userId;
+    private UUID bookId;
     private LocalDateTime borrowDate;
     private LocalDateTime returnDate;
     private LocalDateTime relayReturnDate;
     private Boolean isPenalty;
 }
-
