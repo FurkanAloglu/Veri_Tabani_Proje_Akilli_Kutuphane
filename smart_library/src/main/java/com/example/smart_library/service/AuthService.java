@@ -27,7 +27,7 @@ public class AuthService {
         user.setSurname(request.getSurname());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(Role.STUDENT); // Varsayılan rol
+        user.setRole(Role.STUDENT);
         userRepository.save(user);
     }
 

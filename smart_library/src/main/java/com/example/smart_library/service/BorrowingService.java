@@ -52,7 +52,7 @@ public class BorrowingService {
 
     private BorrowingResponse convertToResponse(Borrowing b){
         return BorrowingResponse.builder()
-                .id(b.getBorrowID())
+                .borrowID(b.getBorrowID())
                 .borrowDate(b.getBorrowDate())
                 .returnDate(b.getReturnDate())
                 .relayReturnDate(b.getRelayReturnDate())

@@ -26,12 +26,11 @@ public class Book {
     private Integer pageCount;
 
     @ManyToOne(fetch= FetchType.LAZY)
-
-    @JoinColumn(name="categoryID",nullable = false)
+    @JoinColumn(name="categoryid",nullable = false)
     private Category category;
 
     @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="authorID")
+    @JoinColumn(name="authorid")
     private Author author;
 
 }
