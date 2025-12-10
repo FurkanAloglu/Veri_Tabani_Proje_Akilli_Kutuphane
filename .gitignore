@@ -1,2 +1,16 @@
 src/main/resources/application.properties
 src/main/resources/application.yml
+# IntelliJ
+.idea/
+*.iml
+
+# Maven/Gradle build
+target/
+build/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
