@@ -3,16 +3,18 @@ package com.example.smart_library.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookID;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID bookID;
 
     @Column(nullable = false)
     private String title;
@@ -24,11 +26,12 @@ public class Book {
     private Integer pageCount;
 
     @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="category_id",nullable = false)
+
+    @JoinColumn(name="categoryID",nullable = false)
     private Category category;
 
     @ManyToOne(fetch= FetchType.LAZY)
-    @JoinColumn(name="author_id")
+    @JoinColumn(name="authorID")
     private Author author;
 
 }

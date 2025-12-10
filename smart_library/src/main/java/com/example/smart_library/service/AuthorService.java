@@ -1,33 +1,55 @@
 package com.example.smart_library.service;
 
-import org.springframework.stereotype.Service;
+import com.example.smart_library.dto.author.AuthorRequest;
+import com.example.smart_library.dto.author.AuthorResponse;
 import com.example.smart_library.model.Author;
 import com.example.smart_library.repository.AuthorRepository;
+import org.springframework.stereotype.Service;
+import lombok.*;
+import com.example.smart_library.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthorService {
+
     private final AuthorRepository authorRepository;
 
     public AuthorService(AuthorRepository authorRepository){
-        this.authorRepository =authorRepository;
+        this.authorRepository = authorRepository;
     }
 
-    public List<Author> findAll(){
-        return authorRepository.findAll();
+    public List<AuthorResponse> findAll() {
+        return authorRepository.findAll()
+                .stream()
+                .map(this::convertToResponse)
+                .collect(Collectors.toList());
     }
 
-    public Author save(Author author){
-        return authorRepository.save(author);//Create-Update
+    public AuthorResponse save(AuthorRequest request) {
+        Author author = new Author();
+        author.setName(request.getName());
+        author.setSurname(request.getSurname());
+
+        Author savedAuthor = authorRepository.save(author);
+
+        return convertToResponse(savedAuthor);
     }
 
-    public Optional<Author> findById(Long id){
-        return authorRepository.findById(id); //Read
+    public Optional<AuthorResponse> findById(UUID id){
+        return authorRepository.findById(id).map(this::convertToResponse);
     }
 
-    public void deleteById(Long id){
-        authorRepository.deleteById(id);//Delete
+    public void deleteById(UUID id){
+        authorRepository.deleteById(id);
     }
 
+    private AuthorResponse convertToResponse(Author author) {
+        return new AuthorResponse(
+                author.getAuthorID(),
+                author.getName(),
+                author.getSurname());
+    }
 }

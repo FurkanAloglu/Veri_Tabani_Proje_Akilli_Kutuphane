@@ -3,6 +3,7 @@ package com.example.smart_library.model;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -12,8 +13,8 @@ import java.time.LocalDateTime;
 
 public class Borrowing {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Long borrowID;
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private UUID borrowID;
 
     @Column(nullable=false)
     private LocalDateTime borrowDate;
@@ -28,11 +29,11 @@ public class Borrowing {
     private Boolean isPenalty;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id",nullable = false)
+    @JoinColumn(name="userID",nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="book_id",nullable=false)
+    @JoinColumn(name="bookID",nullable=false)
     private Book book;
 
     @OneToOne(mappedBy="borrowing",cascade = CascadeType.ALL, fetch=FetchType.LAZY)
