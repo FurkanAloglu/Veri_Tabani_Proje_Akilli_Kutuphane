@@ -25,6 +25,9 @@ public class Book {
     @Column()
     private Integer pageCount;
 
+    @Column(nullable = false)
+    private Integer stock; // Kaç adet var?
+
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="categoryid",nullable = false)
     private Category category;

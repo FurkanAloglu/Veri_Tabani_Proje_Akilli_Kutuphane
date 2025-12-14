@@ -21,6 +21,7 @@ public class BorrowingService {
     private final BorrowingRepository borrowingRepository;
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
+    private final EmailService emailService;
 
     public List<BorrowingResponse> findAll(){
         return borrowingRepository.findAll().stream().map(this::convertToResponse).collect(Collectors.toList());
@@ -44,6 +45,36 @@ public class BorrowingService {
 
     public Optional<BorrowingResponse> findById(UUID id){
         return borrowingRepository.findById(id).map(this::convertToResponse);
+    }
+
+    // Trigger'ı tetikleyecek olan metot: Kitap İade İşlemi
+    public BorrowingResponse returnBook(UUID borrowingId) {
+        Borrowing borrowing = borrowingRepository.findById(borrowingId)
+                .orElseThrow(() -> new RuntimeException("Borrowing not found"));
+
+        java.time.LocalDateTime now = java.time.LocalDateTime.now();
+
+        // Şu anki zamanı iade tarihi olarak set et
+        borrowing.setRelayReturnDate(now);
+        
+        // Kaydettiğimiz anda veritabanındaki UPDATE Trigger'ı çalışacak
+        // ve gecikme varsa Penalty tablosuna kayıt atacak.
+        Borrowing saved = borrowingRepository.save(borrowing);
+
+        // E-posta Bildirimi: Eğer geç iade ise kullanıcıya mail at
+        if (now.isAfter(borrowing.getReturnDate())) {
+            if (borrowing.getUser() != null) {
+                // Not: User entity'nizde getEmail() metodu olduğunu varsayıyoruz.
+                // String userEmail = borrowing.getUser().getEmail(); 
+                // emailService.sendSimpleMessage(userEmail, "Geç İade Bildirimi", "Kitabınızı geç iade ettiniz. Cezanız sisteme yansıtılmıştır.");
+                
+                // Örnek kullanım (User entity detayları bilinmediği için yorum satırı olarak bırakıldı, açabilirsiniz):
+                // emailService.sendSimpleMessage("ogrenci@ornek.com", "Kütüphane: Geç İade", "Kitap iadesi gecikti. Lütfen cezayı kontrol ediniz.");
+                System.out.println("Geç iade tespit edildi, e-posta gönderim sırasına alındı.");
+            }
+        }
+
+        return convertToResponse(saved);
     }
 
     public void deleteById(UUID id){

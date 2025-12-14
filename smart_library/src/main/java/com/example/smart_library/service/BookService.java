@@ -33,6 +33,7 @@ public class BookService {
         book.setTitle(bookRequest.getTitle());
         book.setIsbn(bookRequest.getIsbn());
         book.setPageCount(bookRequest.getPageCount());
+        book.setStock(bookRequest.getStock());
 
         if (bookRequest.getCategoryId() != null) {
             Category category = categoryRepository.findById(bookRequest.getCategoryId())
@@ -74,6 +75,7 @@ public class BookService {
                 .title(book.getTitle())
                 .isbn(book.getIsbn())
                 .pageCount(book.getPageCount())
+                .stock(book.getStock())
                 .category(categoryResp)
                 .author(authorResp)
                 .build();

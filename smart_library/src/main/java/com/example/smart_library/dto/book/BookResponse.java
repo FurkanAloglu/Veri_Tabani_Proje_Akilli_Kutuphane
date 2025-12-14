@@ -18,6 +18,7 @@ public class BookResponse {
     private String title;
     private String isbn;
     private Integer pageCount;
+    private Integer stock;
     private CategoryResponse category;
     private AuthorResponse author;
 }

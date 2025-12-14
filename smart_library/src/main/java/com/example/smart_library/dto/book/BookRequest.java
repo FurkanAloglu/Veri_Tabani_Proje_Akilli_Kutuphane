@@ -15,7 +15,7 @@ public class BookRequest {
     private String title;
     private String isbn;
     private Integer pageCount;
+    private Integer stock;
     private UUID categoryId;
     private UUID authorId;
 }
-
